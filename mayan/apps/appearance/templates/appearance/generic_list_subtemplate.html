@@ -85,8 +85,9 @@
                             {% for object in object_list %}
                                 <tr>
                                     {% if links_multi_menus_results %}
+
                                         <td>
-                                            <input class="form-multi-object-action-checkbox check-all-slave checkbox" name="pk_{{ object.pk }}" type="checkbox" value="" />
+                                            <input id="checkbox_{{object.pk}}" class="form-multi-object-action-checkbox check-all-slave checkbox" name="pk_{{ object.pk }}" type="checkbox" value="" />
                                         </td>
                                     {% endif %}
 
@@ -96,8 +97,13 @@
                                         {% navigation_get_source_columns source=object only_identifier=True as source_column %}
                                         {% if source_column %}
                                             {% navigation_source_column_resolve column=source_column as column_value %}
-                                            <td>
+                                            <td id="columnvalue">
                                                 {{ column_value }}
+                                                {% navigation_check_if_cache_label source_column=source_column as is_label %}
+                                                {% if is_label %}
+                                                    {% navigation_cache_list_column_value_text column_value=column_value as label_text%}
+                                                    <label for="checkbox_{{object.pk}}" hidden>{{ label_text }}</label>
+                                                {% endif %}
                                             </td>
                                         {% endif %}
                                     {% endif %}
@@ -115,7 +121,7 @@
                                     {% endif %}
 
                                     {% for column in extra_columns %}
-                                        <td>{{ object|common_object_property:column.attribute }}</td>
+                                        <td id="extraa">{{ object|common_object_property:column.attribute }}</td>
                                     {% endfor %}
 
                                     {% if not hide_links %}
