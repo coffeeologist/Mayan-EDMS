@@ -97,8 +97,7 @@
                                         {% navigation_get_source_columns source=object only_identifier=True as source_column %}
                                         {% if source_column %}
                                             {% navigation_source_column_resolve column=source_column as column_value %}
-                                            <td id="columnvalue">
-                                                {{ column_value }}
+                                            <td>
                                                 {% navigation_check_if_cache_label source_column=source_column as is_label %}
                                                 {% if is_label %}
                                                     <label for="checkbox_{{object.pk}}">{{ column_value }}</label>
@@ -122,7 +121,7 @@
                                     {% endif %}
 
                                     {% for column in extra_columns %}
-                                        <td id="extraa">{{ object|common_object_property:column.attribute }}</td>
+                                        <td>{{ object|common_object_property:column.attribute }}</td>
                                     {% endfor %}
 
                                     {% if not hide_links %}

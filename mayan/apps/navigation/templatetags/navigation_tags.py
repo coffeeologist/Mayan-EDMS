@@ -88,17 +88,6 @@ def navigation_source_column_resolve(context, column):
         return ''
 
 @register.simple_tag(takes_context=True)
-def navigation_cache_list_column_value_text(context, column_value):
-    # We exepct column value to be something like:
-    # <a href="some/path">text</a>
-    # and the "text" is what we want to extract to serve as a label for a checkbox
-    if column_value and column_value.find("<a") == 0:
-        ind = column_value.find(">")
-        return column_value[ind+1:-5] # Omit the last "</a>" part of the string
-    else:
-        return ''
-
-@register.simple_tag(takes_context=True)
 def navigation_check_if_cache_label(context, source_column):
     if source_column:
         return source_column.label == "Label"
