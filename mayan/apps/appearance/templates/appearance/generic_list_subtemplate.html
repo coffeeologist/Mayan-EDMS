@@ -101,8 +101,9 @@
                                                 {{ column_value }}
                                                 {% navigation_check_if_cache_label source_column=source_column as is_label %}
                                                 {% if is_label %}
-                                                    {% navigation_cache_list_column_value_text column_value=column_value as label_text%}
-                                                    <label for="checkbox_{{object.pk}}" hidden>{{ label_text }}</label>
+                                                    <label for="checkbox_{{object.pk}}">{{ column_value }}</label>
+                                                {% else %}
+                                                    {{ column_value }}
                                                 {% endif %}
                                             </td>
                                         {% endif %}
